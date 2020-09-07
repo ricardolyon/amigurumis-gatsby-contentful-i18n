@@ -8,14 +8,13 @@ import SEO from "../components/seo"
 
 const IndexPage = (props) => (
   <Layout>
-    <pre>{JSON.stringify(props.data.allContentfulDoll)}</pre>
     <SEO title="Home" />
     <h1>Dolls</h1>
-    {props.data.allContentfulDoll.nodes.map(el => {
+    {props.data.allContentfulDoll.nodes.map((el, idx) => {
       const { name, childContentfulDollDescriptionRichTextNode } = el;
       if (name) {
-        return <div className="card">
-          <Link to={name}> {name}</Link>
+        return <div className="card" key={idx}>
+          <Link to={name}>{name}</Link>
           <div>{childContentfulDollDescriptionRichTextNode.content[0].content[0].value}</div>
         </div>
       }

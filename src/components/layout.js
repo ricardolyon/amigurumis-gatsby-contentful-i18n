@@ -8,9 +8,12 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import Navigation from './navigation'
 
 import Header from "./header"
 import "./layout.css"
+import { Helmet } from "react-helmet"
+import { useStyles } from './navigation-styles';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -23,22 +26,20 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const classes = useStyles();
+
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+      <Helmet>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+      </Helmet>
+      <div className={classes.root}>
+        <Navigation />
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          {children}
+        </main>
       </div>
     </>
   )
