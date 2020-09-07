@@ -1,22 +1,44 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from 'gatsby'
+import { documentToReactComponents } from 'gatsby-source-contentful/rich-text'
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
+const IndexPage = (props) => (
   <Layout>
+    <pre>{JSON.stringify(props.data.allContentfulDoll)}</pre>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+    <h1>Dolls</h1>
+    {props.data.allContentfulDoll.nodes.map(el => {
+      const { name, childContentfulDollDescriptionRichTextNode } = el;
+      if (name) {
+        return <div className="card">
+          <Link to={name}> {name}</Link>
+          <div>{childContentfulDollDescriptionRichTextNode.content[0].content[0].value}</div>
+        </div>
+      }
+    })}
   </Layout>
 )
 
 export default IndexPage
+
+export const pageQuery = graphql`
+  query {
+    allContentfulDoll {
+      nodes {
+        id
+        name
+        childContentfulDollDescriptionRichTextNode {
+          content {
+            content {
+              value
+            }
+          }
+        }
+      }
+    }
+  }
+`

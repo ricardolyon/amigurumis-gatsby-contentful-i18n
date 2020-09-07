@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Amigurumis by MP`,
+    description: `Description here.`,
+    author: `@RL`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -30,5 +30,14 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+    {
+      resolve: 'gatsby-source-contentful',
+      options: {
+        spaceId: '9qa4cz0lmd5c',
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || 'jWdmVCKpNXv0cb8CaLu8vRGypkCyzhybxH_k5kGc_3Q',
+        host: 'cdn.contentful.com',
+        downloadLocal: true
+      }
+    }
   ],
 }
