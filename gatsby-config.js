@@ -36,7 +36,7 @@ module.exports = {
         spaceId: '9qa4cz0lmd5c',
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || 'jWdmVCKpNXv0cb8CaLu8vRGypkCyzhybxH_k5kGc_3Q',
         host: 'cdn.contentful.com',
-        downloadLocal: true
+        // downloadLocal: true
       }
     }
   ],
